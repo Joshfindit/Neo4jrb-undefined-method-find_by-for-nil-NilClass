@@ -13,7 +13,9 @@ To reproduce the issue:
 
 *Error happens here*
 
-`undefined method `find_by' for nil:NilClass`
+```
+undefined method `find_by' for nil:NilClass
+```
 
 
 To resolve, simply change `model_class: false` to `model_class: :Note` on `refersTo` and `isReferredToBy` (The 'working' branch demonstrates this)
