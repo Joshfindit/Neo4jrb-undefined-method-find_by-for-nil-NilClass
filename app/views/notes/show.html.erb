@@ -1,0 +1,63 @@
+<p id="notice"><%= notice %></p>
+
+<div class="ui">
+  <a class="ui labeled icon button" href="<%= notes_path %>">
+    <i class="up arrow icon"></i>
+    List Notes
+  </a>
+  <a class="ui basic icon button" href="<%= edit_note_path(@note) %>">
+    <i class="edit icon"></i>
+    Edit
+  </a>
+</div>
+
+<div class="ui hidden divider"></div>
+
+<div class="ui vertical masthead center aligned segment">
+  <h1 class="ui header">Note</h1>
+</div>
+
+<div class="ui text container">
+
+  <p>
+    <strong>Name:</strong>
+    <%= @note.name -%>
+  </p>
+
+  <p>
+    <strong>Content:</strong>
+    <%= @note.content -%>
+  </p>
+
+  <p>
+    <strong>Tags:</strong>
+    <% if !@note.tags.empty? -%>
+      <% @note.tags.each do |tags| -%>
+        <%= link_to tags.name, tags %>
+      <% end -%>
+    <% end -%>
+  </p>
+
+  <p>
+    <strong>Absolutedatetimeoccurredat:</strong>
+    <%= @note.absoluteDatetimeOccurredAt -%>
+  </p>
+
+  <p>
+    <strong>Refersto:</strong>
+    <% if !@note.refersTo.empty? -%>
+      <% @note.refersTo.each do |refersTo| -%>
+        <%= link_to refersTo.name, refersTo %>
+      <% end -%>
+    <% end -%>
+  </p>
+
+  <p>
+    <strong>Isreferredtoby:</strong>
+    <% if !@note.isReferredToBy.empty? -%>
+      <% @note.isReferredToBy.each do |isReferredToBy| -%>
+        <%= link_to isReferredToBy.name, isReferredToBy %>
+      <% end -%>
+    <% end -%>
+  </p>
+</div>

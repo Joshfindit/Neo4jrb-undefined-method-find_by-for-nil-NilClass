@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<div class="ui">
+  <a class="ui labeled icon button" href="<%= tags_path %>">
+    <i class="up arrow icon"></i>
+    List Tags
+  </a>
+  <a class="ui basic icon button" href="<%= edit_tag_path(@tag) %>">
+    <i class="edit icon"></i>
+    Edit
+  </a>
+</div>
+
+<div class="ui hidden divider"></div>
+
+<div class="ui vertical masthead center aligned segment">
+  <h1 class="ui header">Tag</h1>
+</div>
+
+<div class="ui text container">
+
+  <p>
+    <strong>Name:</strong>
+    <%= @tag.name -%>
+  </p>
+
+  <p>
+    <strong>Tagged:</strong>
+    <% if !@tag.tagged.empty? -%>
+      <% @tag.tagged.each do |tagged| -%>
+        <%= link_to tagged.name, tagged %>
+      <% end -%>
+    <% end -%>
+  </p>
+</div>

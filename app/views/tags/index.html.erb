@@ -1,0 +1,38 @@
+<p id="notice"><%= notice %></p>
+
+<div class="ui very padded container ">
+  <h1>Tags</h1>
+
+  <table class="ui very basic celled table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Tagged</th>
+        <th colspan="2"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @tags.limit(45).each do |tag| %>
+        <tr>
+          <td>
+              <%= link_to tag.name, tag %>
+          </td>
+          <td>
+            <%- if !tag.tagged.empty? %>
+              <%- tag.tagged.each do |tagged| -%>
+                <%= link_to tagged.name, tagged %>
+              <%- end -%>
+            <%- end -%>
+          </td>
+          <td><%= link_to 'Edit', edit_tag_path(tag) %></td>
+          <td><%= link_to 'Destroy', tag, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <br>
+
+  <%= link_to 'New Tag', new_tag_path %>
+</div>

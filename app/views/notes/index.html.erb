@@ -1,0 +1,66 @@
+<p id="notice"><%= notice %></p>
+
+<div class="ui very padded container ">
+  <h1>Notes</h1>
+
+  <table class="ui very basic celled table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Content</th>
+        <th>Tags</th>
+        <th>Absolutedatetimeoccurredat</th>
+        <th>Refersto</th>
+        <th>Isreferredtoby</th>
+        <th colspan="2"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @notes.limit(45).each do |note| %>
+        <tr>
+          <td>
+              <%= link_to note.name, note %>
+          </td>
+          <td>
+            <%- if !note.content.nil? %>
+              <%= truncate(note.content, :length => 30, :separator => ' ') %>
+            <%- end %>
+          </td>
+          <td>
+            <%- if !note.tags.empty? %>
+              <%- note.tags.each do |tags| -%>
+                <%= link_to tags.name, tags %>
+              <%- end -%>
+            <%- end -%>
+          </td>
+          <td>
+            <%- if !note.absoluteDatetimeOccurredAt.nil? %>
+              <%= note.absoluteDatetimeOccurredAt %>
+            <%- end %>
+          </td>
+          <td>
+            <%- if !note.refersTo.empty? %>
+              <%- note.refersTo.each do |refersTo| -%>
+                <%= link_to refersTo.name, refersTo %>
+              <%- end -%>
+            <%- end -%>
+          </td>
+          <td>
+            <%- if !note.isReferredToBy.empty? %>
+              <%- note.isReferredToBy.each do |isReferredToBy| -%>
+                <%= link_to isReferredToBy.name, isReferredToBy %>
+              <%- end -%>
+            <%- end -%>
+          </td>
+          <td><%= link_to 'Edit', edit_note_path(note) %></td>
+          <td><%= link_to 'Destroy', note, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <br>
+
+  <%= link_to 'New Note', new_note_path %>
+</div>

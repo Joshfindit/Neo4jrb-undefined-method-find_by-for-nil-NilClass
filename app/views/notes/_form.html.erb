@@ -1,0 +1,59 @@
+<div class="ui text container">
+  <div class="ui form">
+    <%= form_for(@note) do |f| %>
+      <% if @note.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@note.errors.count, "error") %> prohibited this note from being saved:</h2>
+          <ul>
+            <% @note.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+
+      <div class="field">
+        <%= f.label :name %><br>
+        <%= f.text_field :name %>
+      </div>
+
+
+      <div class="field">
+        <%= f.label :content %><br>
+        <%= f.text_area :content %>
+      </div>
+
+
+         
+      <div class="field">
+        <%= f.label :tags_id %><br>
+        <%# classToSelectFrom = @note.class.associations[:tags].model_class.to_s.constantize %>
+        <%#= f.collection_select(:tags, classToSelectFrom.order(:name), :id, :name, options = {:prompt => "Please Select an Item", :selected => @note.tags.pluck(:id)}, html_options = {:multiple => true, :class=>"search"}) %>
+        <%= f.collection_select(:tags, Tag.all.sort { |a,b| a.name <=> b.name }, :id, :name, options = {:prompt => "Please Select an Item", :selected => @note.tags.map(&:id)}, html_options = {:multiple => true, :class=>"search"}) %>
+      </div>
+
+      <div class="field">
+        <%= f.label :absoluteDatetimeOccurredAt %><br>
+        <%= f.text_field :absoluteDatetimeOccurredAt %>
+      </div>
+
+      <div class="field">
+        <%= f.label :refersTo_id %><br>
+        <%# classToSelectFrom = @note.class.associations[:refersTo].model_class.to_s.constantize %>
+        <%#= f.collection_select(:refersTo, classToSelectFrom.order(:name), :id, :name, options = {:prompt => "Please Select an Item", :selected => @note.refersTo.pluck(:id)}, html_options = {:multiple => true, :class=>"search"}) %>
+        <%= f.collection_select(:refersTo, Note.all.sort { |a,b| a.name <=> b.name }, :id, :name, options = {:prompt => "Please Select an Item", :selected => @note.refersTo.map(&:id)}, html_options = {:multiple => true, :class=>"search"}) %>
+      </div>
+
+      <div class="actions">
+        <%= f.submit html_options = {:class=>"ui button"} %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<script>
+$('.search')
+  .dropdown()
+;
+</script>
